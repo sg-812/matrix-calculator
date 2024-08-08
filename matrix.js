@@ -4,6 +4,8 @@ const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
 const path=require('path');
+const cors = require("cors");
+
 
 const PORT=process.env.POR || 1000;
 
@@ -12,7 +14,7 @@ const matRouter=require('./router/matRouter');
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json({extended:true}));
-
+app.use(cors());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');

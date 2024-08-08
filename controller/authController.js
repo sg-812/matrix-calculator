@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
 //**************** sign up ******************************************** */
 const postSignUp = async (req, res) => {
   try {
-    // console.log("Values from sign-up",req.body,req.file);
+    console.log("Values from sign-up",req.body,req.file);
     if (!req.body.email) {
       return res.status(401).json({
         success: false,

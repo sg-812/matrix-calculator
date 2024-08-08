@@ -47,6 +47,28 @@ const createMatrix = async (req, res) => {
   }
 };
 
+const viewMatrix=async(req,res)=>{
+try{
+  let userId=req.user.userdata._id;
+  let matrixData=await MatrixModel.findOne({user:userId})
+  console.log("Existing Data",matrixData);
+  let matArr={matrix1:matrixData.matrix1,matrix2:matrixData.matrix2}
+  return res.status(200).json({
+    success: true,
+    message: "Matrix fetched",
+    status: 200,
+    data:matArr
+  });
+}catch(err){
+  console.log("error for viewing matrix",err);
+  return res.status(401).json({
+    success: false,
+    message: "Matrix fetching failed",
+    status: 401
+  });
+}
+}
+
 const addMatrix = async (req, res) => {
   try {
     let userId=req.user.userdata._id;
@@ -197,6 +219,7 @@ const dashboard=async (req,res)=>{
 }
 module.exports = {
   createMatrix,
+  viewMatrix,
   addMatrix,
   mulMatrix,
   subMatrix,
